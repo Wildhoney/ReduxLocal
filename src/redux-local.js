@@ -1,4 +1,5 @@
-import { curry } from 'lambda';
+import { curry } from 'ramda';
+import { generate } from 'shortid';
 
 /**
  * @constant map
@@ -13,50 +14,47 @@ const map = new WeakMap();
 const id = Symbol('redux-local/id');
 
 /**
- * @method typeFor
+ * @constant DEFAULT_STATE
+ * @type {Symbol}
+ */
+export const DEFAULT_STATE = Symbol('redux-local/default-state');
+
+/**
+ * @method dispatchFor
  * @param {*} instance
- * @param {*} type
+ * @param {Object} action
  * @return {Object}
  */
-export const typeFor = curry((instance, type) => {
+export const dispatchFor = curry((instance, action) => {
 
-    const record = {
-        id: Symbol('redux-local/action'),
-        type
-    };
+    // Utilise the existing record or create a new.
+    const { id } = map.get(instance) || (() => {
+        const record = { id: generate(), instance };
+        map.set(instance, record);
+        return record;
+    })();
 
-    map.set(instance, record);
-    return record;
+    const localAction = { ...action, id };
+    instance.props.dispatch(localAction);
 
 });
 
 /**
  * @method idFor
- * @param {Object} action
- * @return {void}
+ * @param {Object|String} identifier
+ * @return {String|Symbol}
  */
-export const idFor = action => {
-
+export const idFor = identifier => {
+    const record = map.get(identifier);
+    return record ? record.id : DEFAULT_STATE;
 };
 
 /**
- * @method local
- * @param next {Function}
- * @return {Function}
+ * @method stateFor
+ * @param {Object} state
+ * @param {Object} identifier
+ * @return {*}
  */
-export const local = next => {
-
-    return action => {
-        const { type, ...rest } = action;
-        next({ type, ...rest });
-    };
-
-};
-
-// dispatch({ type: typeFor(this, 'increment-counter'), counter: props.counter + 1 });
-//
-// const action = {
-//     type: 'increment-counter',
-//     [Symbol('instance')]: Symbol('x'),
-//     counter: 3
-// };
+export const stateFor = curry((state, identifier) => {
+    return state[identifier] || state[DEFAULT_STATE];
+});
