@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import randomColor from 'randomcolor';
 import { dispatchFor, idFor, stateFor, DEFAULT_STATE } from '../../../src/redux-local';
 
 /**
@@ -105,15 +106,19 @@ export const component = connect(state => state)(class extends Component {
         const { counter } = this.props;
         const localId = idFor(this);
 
+        // Please Queen, forgive me for the American spelling.
+        const color = randomColor({ luminosity: 'dark', count: 1 })[0];
+        const backgroundColor = randomColor({ luminosity: 'light', count: 1 })[0];
+
         return (
-            <div className="counter">
-                <button onClick={() => this.localDispatch(decrementAction(1))}>
+            <div className="counter" style={{ backgroundColor }}>
+                <a onClick={() => this.localDispatch(decrementAction(1))}>
                     -
-                </button>
-                <var>{counter[localId]}</var>
-                <button onClick={() => this.localDispatch(incrementAction(1))}>
+                </a>
+                <var style={{ color }}>{counter[localId]}</var>
+                <a onClick={() => this.localDispatch(incrementAction(1))}>
                     +
-                </button>
+                </a>
             </div>
         );
 

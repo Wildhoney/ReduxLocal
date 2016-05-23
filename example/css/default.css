@@ -1,0 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+section.counters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.counter {
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    width: 80px;
+    height: 80px;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    position: relative;
+}
+
+div.counter var {
+    font-style: normal;
+    padding: 0 5px;
+}
+
+div.counter a {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+    padding: 0 8px;
+    color: white;
+    line-height: 80px;
+}
+
+div.counter a:last-of-type {
+    left: 50%;
+    text-align: right;
+}
+
+div.counter a:hover {
+    background-color: rgba(255, 255, 255, .15);
+}
