@@ -1,2 +1,5 @@
-# ReduxLocal
-Redux middleware for maintaining pseudo-local state in a single tree.
+# Redux Local
+
+> Redux middleware for maintaining pseudo-local state in a single tree.
+
+
