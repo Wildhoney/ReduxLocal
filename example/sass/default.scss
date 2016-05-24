@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+section.counters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  div.counter {
+    $size: 150px;
+    $spacing: 10px;
+
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 $spacing;
+    width: $size;
+    height: $size;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    position: relative;
+    background-color: rgba(0, 0, 0, .25);
+
+    var {
+      font-style: normal;
+      padding: 0 5px;
+    }
+
+    @for $i from 1 through 3 {
+
+      $r: random(255);
+      $g: random(255);
+      $b: random(255);
+
+      $r: ($r + 255) / 2;
+      $g: ($g + 255) / 2;
+      $b: ($b + 255) / 2;
+
+      &:nth-of-type(#{$i}) {
+        color: black;
+        background-color: rgba($r, $g, $b, .5);
+      }
+    }
+  }
+}

@@ -8,12 +8,6 @@ import { generate } from 'shortid';
 const map = new WeakMap();
 
 /**
- * @constant id
- * @type {Symbol}
- */
-const id = Symbol('redux-local/id');
-
-/**
  * @constant DEFAULT_STATE
  * @type {Symbol}
  */
@@ -22,39 +16,50 @@ export const DEFAULT_STATE = Symbol('redux-local/default-state');
 /**
  * @method dispatchFor
  * @param {*} instance
- * @param {Object} action
  * @return {Object}
  */
-export const dispatchFor = curry((instance, action) => {
+export const dispatchFor = instance => {
 
-    // Utilise the existing record or create a new.
-    const { id } = map.get(instance) || (() => {
-        const record = { id: generate(), instance };
-        map.set(instance, record);
-        return record;
-    })();
+    return {
 
-    const localAction = { ...action, id };
-    instance.props.dispatch(localAction);
+        /**
+         * @constant id
+         * @type {String|Symbol}
+         */
+        id: (() => {
+            const record = map.get(instance);
+            return record ? record.id : DEFAULT_STATE;
+        })(),
 
-});
+        /**
+         * @method localDispatch
+         * @param {Object} action
+         * @return {void}
+         */
+        localDispatch(action) {
 
-/**
- * @method idFor
- * @param {Object|String} identifier
- * @return {String|Symbol}
- */
-export const idFor = identifier => {
-    const record = map.get(identifier);
-    return record ? record.id : DEFAULT_STATE;
+            // Utilise the existing record or create a new.
+            const { id } = map.get(instance) || (() => {
+                const record = { id: generate(), instance };
+                map.set(instance, record);
+                return record;
+            })();
+
+            const localAction = { ...action, id };
+            instance.props.dispatch(localAction);
+
+        }
+
+    };
+
 };
 
 /**
- * @method stateFor
+ * @method bindState
  * @param {Object} state
  * @param {Object} identifier
  * @return {*}
  */
-export const stateFor = curry((state, identifier) => {
+export const bindState = curry((state, identifier) => {
     return state[identifier] || state[DEFAULT_STATE];
 });

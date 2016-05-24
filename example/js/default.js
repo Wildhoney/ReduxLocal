@@ -6,6 +6,8 @@ import { local } from '../../src/redux-local';
 import reducers from './reducers';
 import Container from './container';
 
+import '../sass/default.scss';
+
 render((
     <Provider store={createStore(reducers)}>
         <Container />

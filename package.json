@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/Wildhoney/ReduxLocal#readme",
   "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "ava": "^0.14.0",
     "babel-cli": "^6.9.0",
     "babel-loader": "^6.2.4",
@@ -45,12 +46,15 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "css-loader": "^0.23.1",
     "express": "^4.13.4",
-    "randomcolor": "^0.4.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.7.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "sass-loader": "^3.2.0",
     "webpack": "^1.13.1"
   },
   "dependencies": {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import randomColor from 'randomcolor';
-import { dispatchFor, idFor, stateFor, DEFAULT_STATE } from '../../../src/redux-local';
+import { dispatchFor, bindState, DEFAULT_STATE } from '../../../src/redux-local';
 
 /**
  * @constant INITIAL_STATE
@@ -38,7 +37,7 @@ const RESET = Symbol('counter/reset');
 export const reducer = (state = INITIAL_STATE, action) => {
 
     const { id } = action;
-    const getState = stateFor(state);
+    const getState = bindState(state);
 
     switch (action.type) {
 
@@ -92,31 +91,21 @@ export const resetAction = () => {
 export const component = connect(state => state)(class extends Component {
 
     /**
-     * @property localDispatch
-     * @type {Function}
-     */
-    localDispatch = dispatchFor(this);
-
-    /**
      * @method render
      * @return {XML}
      */
     render() {
 
         const { counter } = this.props;
-        const localId = idFor(this);
-
-        // Please Queen, forgive me for the American spelling.
-        const color = randomColor({ luminosity: 'dark', count: 1 })[0];
-        const backgroundColor = randomColor({ luminosity: 'light', count: 1 })[0];
+        const { id, localDispatch } = dispatchFor(this);
 
         return (
-            <div className="counter" style={{ backgroundColor }}>
-                <a onClick={() => this.localDispatch(decrementAction(1))}>
+            <div className="counter">
+                <a onClick={() => localDispatch(decrementAction(1))}>
                     -
                 </a>
-                <var style={{ color }}>{counter[localId]}</var>
-                <a onClick={() => this.localDispatch(incrementAction(1))}>
+                <var>{counter[id]}</var>
+                <a onClick={() => localDispatch(incrementAction(1))}>
                     +
                 </a>
             </div>
