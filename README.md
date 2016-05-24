@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 };
 ```
 
-You then need to setup the reducer which uses the `id` to resolve which component dispatched the action:
+Setup the reducer using the `id` to resolve which component dispatched the action:
 
 ```javascript
 export default (state = INITIAL_STATE, action) => {
@@ -49,7 +49,7 @@ export default (state = INITIAL_STATE, action) => {
 };
 ```
 
-Afterwards you simply need to setup the dispatcher for the component &ndash; as well as the `id` which uniquely identifies the current component:
+Destructure the `id` and dispatcher for the component, and then invoke `localDispatch` with your action:
 
 ```javascript
 render() {
@@ -67,3 +67,10 @@ render() {
 ```
 
 It's worth taking a look at how the example [`Counter`](https://github.com/Wildhoney/ReduxLocal/blob/master/example/js/components/counter.js) component works with `redux-local`, as well as [the source](https://github.com/Wildhoney/ReduxLocal/blob/master/src/redux-local.js) which is intended to be straight-forward.
+
+### Functions
+
+* `bindLocalState`: Is a helper function that takes the `state` and yields the state slice that pertains to the passed action by using the unique `id` property. Returns `DEFAULT_STATE` if the `id` doesn't yet exist in `state`;
+* `localFor`: Takes the component instance &mdash; `this` &mdash; and yields both the unique `id` for the component &mdash; or `DEFAULT_STATE` if no local dispatches have yet occurred &mdash; and the `dispatch` function which appends the `id` to the action.
+
+**Note:** The `localFor` function takes an optional second parameter for passing the `id` property name for the action.
