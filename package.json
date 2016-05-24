@@ -58,6 +58,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "es6-weak-map": "^2.0.1",
     "ramda": "^0.21.0",
     "shortid": "^2.2.6"
   }

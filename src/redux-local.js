@@ -1,5 +1,6 @@
 import { curry } from 'ramda';
 import { generate } from 'shortid';
+import WeakMap from 'es6-weak-map';
 
 /**
  * @constant map
