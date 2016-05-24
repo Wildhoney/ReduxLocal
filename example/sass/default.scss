@@ -17,25 +17,22 @@ section.counters {
   height: 100vh;
 
   button.reset {
-    height: $size;
-    border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid rgba(0, 0, 0, .2);
     padding: 10px 20px;
     font-size: 12px;
-    margin-left: 10px;
-    background-color: rgba(0, 0, 0, .2);
-    color: white;
+    margin-left: 20px;
+    color: black;
+    background-color: white;
+    border-radius: 3px;
     outline: none;
     cursor: pointer;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
-    border-radius: 3px;
   }
 
   div.counter {
     $text-size: 25px;
     $spacing: 10px;
 
-    border-radius: 3px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +66,6 @@ section.counters {
       height: $size;
       line-height: $size;
       cursor: pointer;
-      background-color: rgba(0, 0, 0, .025);
     }
 
     @for $i from 1 through 3 {
@@ -86,7 +82,7 @@ section.counters {
         $c: rgba($r, $g, $b, .5);
 
         color: black;
-        background: linear-gradient(darken($c, 10), $c);
+        background: linear-gradient(darken($c, 25), $c);
         border-bottom: 1px solid darken($c, 5);
       }
     }

@@ -30,7 +30,7 @@ const RESET = Symbol('counter/reset');
 
 /**
  * @method reducer
- * @param {Object} state
+ * @param {Object} [state = INITIAL_STATE]
  * @param {Object} action
  * @return {Object}
  */

@@ -17,9 +17,10 @@ export const DEFAULT_STATE = Symbol('redux-local/default-state');
 /**
  * @method localFor
  * @param {*} instance
+ * @param {String} [property = "id"]
  * @return {Object}
  */
-export const localFor = instance => {
+export const localFor = (instance, property = 'id') => {
 
     return {
 
@@ -47,7 +48,7 @@ export const localFor = instance => {
             })();
 
             // Dispatch the original event, including the `id` parameter.
-            instance.props.dispatch({ ...action, id });
+            instance.props.dispatch({ ...action, [property]: id });
 
         }
 
