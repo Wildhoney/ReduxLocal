@@ -1,0 +1,22 @@
+language: node_js
+
+node_js:
+  - '6.0.0'
+  - '6.1.0'
+  - '6.2.0'
+
+before_deploy:
+  - npm run build
+  - npm run cleanup
+
+sudo: false
+
+deploy:
+  provider: heroku
+  all_branches: true
+  skip_cleanup: true
+  api_key:
+    secure: lOIrVY8yaO6kVQGDVz8exyD+7t2hN3pWcpAu3Bv1oT56Yu3Kk+WFjpR4mzA2LZmFy9oPfJcDQRMtO7sZVA932X53IuMoRfYPNy1sbYm1Anonqp9hNBYAAiVx0XS/FVCmvLcBPSp9sfSYvMDOyT0Zid6FNRNTzyP2oNPh+FqW+Rzkt/oLwjh3deO0xNQF+DxwZW64DDF10hdybM7ZBNv6zf/5gsc7+q0DehVSkc2c6m3HLtemDqbRIogPq+pD4XJgb4C5C1Gu4HktUUkq8Clrpo8SXKQtbewwLxZTdrC64U8QgkkceXuB2lBB0jUiuWlHxMO/d2/KPjjTDhigkhFDVZz+HvMiobMdkhjQPskawR3hfNDwCeLw3cmDKMdkKuPEqUlf5fd3BsgfHKq8fZ/JAmYGz/4GJH7OyObmiKgrOU1PJd9W/i1cn6T7+RaUOTlatK5aBD30QZaV5L19+msnoxrgNlY5VLc95m2YX76l/KJauf4y9LVPqnEzJuqfFrgPUKmXMeJtyRKKyhseCGvrLNamDY8uQgEmxzrsiCU+QqVN3xkjCQiyh6qctFDbpPg7EVUKVaktE2gGCUaPH86BdEGsUgHMqUxU80BGgx4iuskY1D7rK2IgptOfnn1XsxLXS89kNsVBQFt1c4z53tS9bPP9w0KPuVOIZhvp9K2z+FU=
+  app: redux-local
+  on:
+    repo: Wildhoney/ReduxLocal
