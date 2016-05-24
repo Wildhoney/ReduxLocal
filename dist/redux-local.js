@@ -64,6 +64,8 @@ module.exports =
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	/**
 	 * @constant map
 	 * @type {WeakMap}
@@ -79,9 +81,12 @@ module.exports =
 	/**
 	 * @method localFor
 	 * @param {*} instance
+	 * @param {String} [property = "id"]
 	 * @return {Object}
 	 */
 	var localFor = exports.localFor = function localFor(instance) {
+	  var property = arguments.length <= 1 || arguments[1] === undefined ? 'id' : arguments[1];
+
 
 	  return {
 
@@ -113,7 +118,7 @@ module.exports =
 
 	      // Dispatch the original event, including the `id` parameter.
 
-	      instance.props.dispatch(_extends({}, action, { id: id }));
+	      instance.props.dispatch(_extends({}, action, _defineProperty({}, property, id)));
 	    }
 	  };
 	};
