@@ -42,6 +42,7 @@ When the user clicks on the `div` in the above example, an action will be dispat
 
 **Note:** If `id` clashes with any of your actions, you can change its name by passing in a `string` as the second argument to `localFor`: `localFor(this, 'localId');`.
 
+```javascript
 export default (state = INITIAL_STATE, action) => {
 
     const { id } = action;
@@ -57,6 +58,7 @@ export default (state = INITIAL_STATE, action) => {
     return state;
 
 };
+```
 
 Reducers for managing pseudo-local state don't look much different from how you would normally write them &mdash; you could even have a `case` for managing **all** `INCREMENT` actions by simply not using the `id` from the passed action. The curried `bindLocalState` function simply accepts the current `state` and returns the slice that pertains to the `id` &mdash; if the `id` doesn't currently exist in the `state` then `DEFAULT_STATE` will be returned which allows setting up of the default state for the reducer.
 
