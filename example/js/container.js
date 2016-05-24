@@ -15,7 +15,7 @@ export default connect(state => state)(class extends Component {
                 <Counter {...this.props} />
                 <Counter {...this.props} />
                 <Counter {...this.props} />
-                <button onClick={() => this.props.dispatch(resetAction())}>Reset</button>
+                <button className="reset" onClick={() => this.props.dispatch(resetAction())}>Reset</button>
             </section>
         );
 

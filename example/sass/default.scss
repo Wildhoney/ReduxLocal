@@ -9,13 +9,30 @@ html, body {
 }
 
 section.counters {
+  $size: 150px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
+  button.reset {
+    height: $size;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 20px;
+    font-size: 12px;
+    margin-left: 10px;
+    background-color: rgba(0, 0, 0, .2);
+    color: white;
+    outline: none;
+    cursor: pointer;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
+    border-radius: 3px;
+  }
+
   div.counter {
-    $size: 150px;
+    $text-size: 25px;
     $spacing: 10px;
 
     border-radius: 3px;
@@ -28,25 +45,49 @@ section.counters {
     font-family: Arial, Tahoma, Helvetica, sans-serif;
     position: relative;
     background-color: rgba(0, 0, 0, .25);
+    user-select: none;
 
     var {
       font-style: normal;
       padding: 0 5px;
+      color: white;
+      font-size: 22px;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
+      display: inline-block;
+      height: $text-size;
+      line-height: $text-size;
+      width: 80px;
+      text-align: center;
+    }
+
+    a {
+      display: inline-block;
+      width: 50px;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
+      text-align: center;
+      color: white;
+      height: $size;
+      line-height: $size;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, .025);
     }
 
     @for $i from 1 through 3 {
 
-      $r: random(255);
-      $g: random(255);
-      $b: random(255);
+      $r: random(round(255 / 2));
+      $g: random(round(255 / 2));
+      $b: random(round(255 / 2));
 
       $r: ($r + 255) / 2;
       $g: ($g + 255) / 2;
       $b: ($b + 255) / 2;
 
       &:nth-of-type(#{$i}) {
+        $c: rgba($r, $g, $b, .5);
+
         color: black;
-        background-color: rgba($r, $g, $b, .5);
+        background: linear-gradient(darken($c, 10), $c);
+        border-bottom: 1px solid darken($c, 5);
       }
     }
   }

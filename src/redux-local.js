@@ -15,11 +15,11 @@ const map = new WeakMap();
 export const DEFAULT_STATE = Symbol('redux-local/default-state');
 
 /**
- * @method dispatchFor
+ * @method localFor
  * @param {*} instance
  * @return {Object}
  */
-export const dispatchFor = instance => {
+export const localFor = instance => {
 
     return {
 
@@ -33,11 +33,11 @@ export const dispatchFor = instance => {
         })(),
 
         /**
-         * @method localDispatch
+         * @method dispatch
          * @param {Object} action
          * @return {void}
          */
-        localDispatch(action) {
+        dispatch(action) {
 
             // Utilise the existing record or create a new.
             const { id } = map.get(instance) || (() => {
@@ -46,8 +46,8 @@ export const dispatchFor = instance => {
                 return record;
             })();
 
-            const localAction = { ...action, id };
-            instance.props.dispatch(localAction);
+            // Dispatch the original event, including the `id` parameter.
+            instance.props.dispatch({ ...action, id });
 
         }
 
@@ -56,11 +56,11 @@ export const dispatchFor = instance => {
 };
 
 /**
- * @method bindState
+ * @method bindLocalState
  * @param {Object} state
  * @param {Object} identifier
  * @return {*}
  */
-export const bindState = curry((state, identifier) => {
+export const bindLocalState = curry((state, identifier) => {
     return state[identifier] || state[DEFAULT_STATE];
 });

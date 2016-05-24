@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { dispatchFor, bindState, DEFAULT_STATE } from '../../../src/redux-local';
+import { localFor, bindLocalState, DEFAULT_STATE } from '../../../src/redux-local';
 
 /**
  * @constant INITIAL_STATE
@@ -37,7 +37,7 @@ const RESET = Symbol('counter/reset');
 export const reducer = (state = INITIAL_STATE, action) => {
 
     const { id } = action;
-    const getState = bindState(state);
+    const getState = bindLocalState(state);
 
     switch (action.type) {
 
@@ -91,13 +91,22 @@ export const resetAction = () => {
 export const component = connect(state => state)(class extends Component {
 
     /**
+     * @method shouldComponentUpdate
+     * @return {Boolean}
+     */
+    shouldComponentUpdate(nextProps) {
+        const { id } = localFor(this);
+        return this.props.counter[id] !== nextProps.counter[id];
+    }
+
+    /**
      * @method render
      * @return {XML}
      */
     render() {
 
         const { counter } = this.props;
-        const { id, localDispatch } = dispatchFor(this);
+        const { id, dispatch: localDispatch } = localFor(this);
 
         return (
             <div className="counter">
