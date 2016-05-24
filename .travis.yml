@@ -6,8 +6,7 @@ node_js:
   - '6.2.0'
 
 before_deploy:
-  - npm run build
-  - npm run cleanup
+  - npm run dev
 
 sudo: false
 
