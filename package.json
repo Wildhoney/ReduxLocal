@@ -1,6 +1,6 @@
 {
   "name": "redux-local",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Redux helper for maintaining pseudo-local state in a single tree.",
   "main": "dist/redux-local.js",
   "directories": {
